@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio Sellanes</title>
+</head>
+<body>
+    <h1>Desafio 01 - Clase 01</h1>
+    <h2>Sellanes Juan Pablo</h2>
+    <p>El valor K sera la edad^3. Valores al cuadrado o sin elevar daban demasiado error</p>
+    <p>Formula Usada para aproximar Pi</p>
+    <img src="https://3.bp.blogspot.com/-WMObJk_jf8g/VQBlWwLxvXI/AAAAAAAAA-M/weXLPj2FheM/s1600/pi.png">
+</body>
+
+<script>
+    var userName = prompt("Ingrese su Nombre");
+    var userAge = prompt("Ingrese su Edad");
+    var precision = parseInt(userAge);
+    var multi = 0;
+    let k = 1;
+
+    for (let k = 1; k < precision*precision*precision + 1; k++){
+        multi += ((-1)**(k +1))/(2*k - 1);
+    }
+    
+    
+    const finalOutput = "Hola "+ userName + "tenes " + userAge + " años, y la cantidad de digitos de Pi en base al cubo de tu edad es" + " resultado" + 4*multi;
+    
+    alert(finalOutput);
+</script>
+
+
+
+</html>
