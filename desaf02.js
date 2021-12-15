@@ -5,7 +5,7 @@ if (edad < 0){
     alert("No puede tener edad negativa!"); 
 } else{
     if (edad > 17){
-        alert("Usted tiene mas de 18 años");
+        alert("Usted es mayor de edad");
     }
     if (edad > 100){
         alert("Usted tiene mas de 100 años");
