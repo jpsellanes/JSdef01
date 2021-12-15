@@ -4,7 +4,7 @@ let edad = parseInt(userAge);
 if (edad < 0){
     alert("No puede tener edad negativa!"); 
 } else{
-    if (edad <19){
+    if (edad > 17){
         alert("Usted tiene mas de 18 años");
     }
     if (edad > 100){
