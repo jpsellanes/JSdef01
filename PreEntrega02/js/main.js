@@ -6,6 +6,8 @@ let carritoDiv = document.getElementById("carrito");
 const productos = [];
 productothermal = false;
 productoarmado = false;
+let totalProducto = 0;
+const saveLocally = (key, value) => {localStorage.setItem(key, value)};
 
 
 ///////////////////////////////
@@ -114,7 +116,7 @@ function crearProducto(productos) {
 //////************************************************************************** */
 ///// Funcion para estimar la influencia del servicio de Diseño Termico y Armado
 ////****************************************************************************** */
-let totalProducto = 0;
+
 
 function extras(producto){
     if(productothermal==true && productoarmado==true){
@@ -144,13 +146,13 @@ function resumenProducto(productos){
 // JSON FILE
 ////////////// *******************************************************
 
-const saveLocally = (key, value) => {localStorage.setItem(key, value)};
-
 function crearJSON(productos){
-    for (const producto of productos) {
-        saveLocally(producto.id, JSON.stringify(producto));
+    let jsonindex =0;
+    for (producto of productos) {
+        saveLocally(jsonindex, JSON.stringify(producto));
         console.log(JSON.stringify(producto));
+        jsonindex = jsonindex + 1;
     }
 
-    /*const locally = JSON.parse(localStorage.getItem("listProducts"));*/
+    const locally = JSON.parse(localStorage.getItem("listProducts"));
 }
