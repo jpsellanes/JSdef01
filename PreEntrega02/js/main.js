@@ -152,5 +152,5 @@ function crearJSON(productos){
         console.log(JSON.stringify(producto));
     }
 
-    const locally = JSON.parse(localStorage.getItem("listofProducts"));
+    /*const locally = JSON.parse(localStorage.getItem("listProducts"));*/
 }
