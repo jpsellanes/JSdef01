@@ -2,6 +2,7 @@
 /////////////////////////////////////
 //// Se definen algunas variables a emplear
 ///////////////////////////////////
+let addproduct = document.getElementById("addProduct")
 let carritoDiv = document.getElementById("carrito");
 const productos = [];
 productothermal = false;
@@ -52,7 +53,7 @@ ejecutar();
 class Producto {
     constructor(products){
         this.nombre = products.nombre;
-        this.precio = products.precio;
+        this.components = products.components;
         this.cantidad = products.cantidad;
     }
 }
@@ -65,18 +66,20 @@ function ejecutar() {
     let formProductosInput = document.createElement("form");
     formProductosInput.innerHTML = `
     <input placeholder = "Add PCB type" type="text"></input>
-    <input placeholder = "Add liste Cost" type="number"></input>
+    <input placeholder = "Add Amount of Components" type="number"></input>
     <input placeholder = "Add units to buy" type="number"></input>
     <button type ="submit">Agregar</button>
     `;
-    carritoDiv.appendChild(formProductosInput);
+    addproduct.appendChild(formProductosInput);
 
     formProductosInput.onsubmit = function(event){
         event.preventDefault();
         const inputs = event.target.children;
-        productos.push(new Producto({ nombre: inputs[0].value, precio: inputs[1].value, cantidad: inputs[2].value }));
+        productos.push(new Producto({ nombre: inputs[0].value, components: inputs[1].value, cantidad: inputs[2].value }));
         console.log("ejecutarAnda");
+        crearProducto(productos)
     }
+    
 }
 
 
@@ -106,7 +109,7 @@ function crearProducto(productos) {
         div.setAttribute("id","Div01")
         div.innerHTML = `
             <p>Producto: ${producto.nombre}</p>
-            <p>Precio: $${producto.precio}</p>
+            <p>Precio: ${costoItemSolo(producto)}</p>
             <p>Cantidad: ${producto.cantidad}</p>
         `;
         carritoDiv.appendChild(div);
@@ -130,7 +133,7 @@ function extras(producto){
 
 function resumenProducto(productos){
     for(producto of productos){
-        totalProducto =  totalProducto + parseFloat(producto.precio)*parseFloat(producto.cantidad)*extras(producto);
+        totalProducto =  totalProducto + componentsAmount(producto)*parseFloat(producto.cantidad)*extras(producto) + pcbType(producto);
     }
     let div02 = document.createElement("div");
     div02.setAttribute("id", "Div01");
@@ -140,7 +143,31 @@ function resumenProducto(productos){
     carritoDiv.appendChild(div02);
 }
 
+function componentsAmount(producto){
+    if(parseFloat(producto.components) > 150){
+        return 150;
+    }else if(parseFloat(producto.components) > 100){
+        return 100;
+    }else if(parseFloat(producto.components) > 50){
+        return 70;
+    } else{
+        return 50;
+    }
+}
 
+function pcbType(producto){
+    if(producto.nombre == "A" || producto.nombre == "a" ){
+        return 20;
+    }else if (producto.nombre == "B" || producto.nombre == "b" ){
+        return 10;
+    }else if (producto.nombre == "C" || producto.nombre == "c" ){
+        return 7.5;
+    }
+}
+
+function costoItemSolo(producto){
+    return componentsAmount(producto)*parseFloat(producto.cantidad)*extras(producto) + pcbType(producto);
+}
 
 ////////////// *******************************************************
 // JSON FILE
