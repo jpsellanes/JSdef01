@@ -1,0 +1,18 @@
+[
+    {
+        "currency": "dolar",
+        "symbol": "u$d",
+        "eqRate": 220
+    },
+    {
+        "currency": "eurp",
+        "symbol": "€",
+        "eqRate": 250  
+    },
+    {
+        "currency": "real",
+        "symbol": "R$",
+        "eqRate": 50
+    }
+
+]
