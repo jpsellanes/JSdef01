@@ -40,7 +40,16 @@ $("#budget").on("click",function(){
     console.log(productos);
     $.get(URLdata, function(data, estado){
         if(estado == "success"){
-            misDatos = data;
+            let usdInArs = data.eqRate;
+            console.log(data);
+            console.log(usdInArs);
+            let totalProductoARS = totalProducto*usdInArs;
+            let div03 = document.createElement("div");
+            div03.setAttribute("id", "Div02");
+            div03.innerHTML = `
+                <p>Costo totla = ar$${totalProductoARS}</p>
+            `
+            carritoDiv.appendChild(div03);
         } 
     });
 });
@@ -48,8 +57,7 @@ $("#budget").on("click",function(){
 //////////////////////////////
 //// extraigo el exchange rate
 //////////////////////////////
-let dataJson = JSON.parse(misDatos);
-let usdInArs = dataJson[0][eqRate];
+
 
 
 $("#addThermalAnalysis").on("click",function(){
@@ -138,15 +146,17 @@ function resumenProducto(productos){
     for(producto of productos){
         totalProducto =  totalProducto + componentsAmount(producto)*parseFloat(producto.cantidad)*extras(producto) + pcbType(producto);
     }
-    let totalProductoARS = totalProducto*usdInArs;
+    /*let totalProductoARS = totalProducto*usdInArs;*/
     let div02 = document.createElement("div");
     div02.setAttribute("id", "Div01");
     div02.innerHTML = `
         <p>Costo total = ${totalProducto}</p>
-        <p>Costo totla = ar$${totalProductoARS}</p>
+        
     `
     carritoDiv.appendChild(div02);
 }
+
+//<p>Costo totla = ar$${totalProductoARS}</p>
 
 function componentsAmount(producto){
     if(parseFloat(producto.components) > 150){
